@@ -8,7 +8,7 @@ import { Parser } from '@json2csv/plainjs'
 const prompt = await text({
   message: 'What dou you want to search?',
   placeholder: 'Shopping Malls',
-  initialValue: 'Shopping Malls'
+  initialValue: 'Marine supply store'
 })
 
 if (isCancel(prompt)) {
