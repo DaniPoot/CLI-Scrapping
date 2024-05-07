@@ -36,13 +36,17 @@ async function autoScroll(page) {
 }
 
 
-export async function scrapeGoogleMaps(prompt) {
+export async function scrapeGoogleMaps({
+  prompt,
+  place
+}) {
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
     
   // Navigate to Google Maps
-  await page.goto('https://www.google.com/maps')
+  await page.goto(`https://www.google.com/maps/place/${place}`)
   
+  await page.waitForSelector('input[id="searchboxinput"]')
   // Type the place in search box and hit Enter
 
   await page.type('input[id="searchboxinput"]', prompt)
