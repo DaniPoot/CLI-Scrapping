@@ -15,6 +15,16 @@ if (isCancel(prompt)) {
   process.exit(0)
 }
 
+const place = await text({
+  message: 'Enter the place you want to search',
+  placeholder: 'New York',
+  initialValue: 'New York'
+})
+
+if (isCancel(place)) {
+  process.exit(0)
+}
+
 const outputType = await multiselect({
   message: 'Pick a output from data.',
   options: [
@@ -55,7 +65,10 @@ if (outputType.some(type => type === 'json' || type === 'csv')) {
 
 const s = spinner()
 s.start('Sraping Google Maps...')
-const results = await scrapeGoogleMaps(prompt)
+const results = await scrapeGoogleMaps({
+  prompt,
+  place
+})
 s.stop('Enf of scraping Google Maps!')
 
 if (outputType.includes('console')) {
